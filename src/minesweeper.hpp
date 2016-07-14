@@ -22,7 +22,7 @@
 class MinesweperGame {
 
 public:
-	MinesweperGame(int height = 20, int width = 20, int mineCount = 15);
+	MinesweperGame(int height = 10, int width = 10, int mineCount = 30);
 	enum GameStatus {ACTIVE = 0, WON, LOST};
 	GameStatus status;
 	int getCell(int x, int y);
@@ -31,6 +31,9 @@ public:
 	int height;
 	int width;
 	int mineCount;
+	
+	GameOver gameOver;
+	InvalidCell invalidCell;
 	
 	
 private:

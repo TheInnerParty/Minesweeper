@@ -17,10 +17,10 @@ MinesweperGame::MinesweperGame(int height, int width, int mineCount) {
 	
 	
 	// Generate mineCount mine locations
-	srand (time(NULL));
+	srand ((unsigned int) time(NULL));
 	std::list<BoardCoordinate> mines;
 	//std::unordered_map<BoardCoordinate, bool, BCHasher> mines;
-	for (int i = 0; 0<mineCount; i++) {
+	for (int i = 0; i<mineCount; i++) {
 		bool retry = false;
 		do {
 			BoardCoordinate mine(rand() % width, rand() % height);
@@ -76,6 +76,7 @@ MinesweperGame::BoardCoordinate::BoardCoordinate(const BoardCoordinate& old, int
 	y = old.y+yAdd;
 }
 bool MinesweperGame::BoardCoordinate::operator==(const MinesweperGame::BoardCoordinate &b) const {
+	//std::cout << "\nCalled operator== of BoardCoordinate! Value:" << x << " and " <<b.x << ";   " << y << " and " << b.y;
 	return (x == b.x && y == b.y);
 }
 

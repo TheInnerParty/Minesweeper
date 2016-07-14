@@ -18,7 +18,7 @@ class InvalidCell: public std::exception
 	{
 		return "Cell does not exist.";
 	}
-} invalidCell;
+} ;
 
 
 
@@ -28,6 +28,6 @@ class GameOver: public std::exception
 	{
 		return "Game is already complete.";
 	}
-} gameOver;
+} ;
 
 #endif /* minesweeperExceptions_hpp */
