@@ -12,6 +12,8 @@
 #include <vector>
 #include <tuple>
 #include <unordered_map>
+#include <list>
+#include <algorithm>
 #include <random>
 #include <time.h>
 #include <iostream>
@@ -36,7 +38,7 @@ private:
 		BoardCoordinate();
 		BoardCoordinate(int x, int y);
 		BoardCoordinate(const BoardCoordinate& old, int xAdd, int yAdd);
-		bool operator==(BoardCoordinate& b) const;
+		bool operator==(const BoardCoordinate& b) const;
 		int x;
 		int y;
 	};
@@ -51,16 +53,6 @@ private:
 	void revealAdjacent(BoardCoordinate coord);
 	void checkWin();
 	
-	struct BCHasher
-	{
-  std::size_t operator()(const BoardCoordinate& k) const
-  {
-	  using std::size_t;
-	  using std::hash;
-	  
-	  return hash<int>()(k.x+k.y);
-  }
-	};
 	
 };
 

@@ -13,18 +13,20 @@ MinesweperGame::MinesweperGame(int height, int width, int mineCount) {
 	this->width = width;
 	this->mineCount = mineCount;
 	
-	//TODO: Init Board
+	
 	
 	
 	// Generate mineCount mine locations
 	srand (time(NULL));
-	std::unordered_map<BoardCoordinate, bool, BCHasher> mines;
+	std::list<BoardCoordinate> mines;
+	//std::unordered_map<BoardCoordinate, bool, BCHasher> mines;
 	for (int i = 0; 0<mineCount; i++) {
 		bool retry = false;
 		do {
 			BoardCoordinate mine(rand() % width, rand() % height);
-			if (mines.find(mine) == mines.end()) {
-				mines.insert ( {mine, true} );
+			// TODO: Use Map for mines to reduce running time
+			if (std::find(mines.begin(), mines.end(), mine) == mines.end()) {
+				mines.push_back(mine);
 				retry = false;
 			} else retry= true;
 		} while (retry);
@@ -40,8 +42,8 @@ MinesweperGame::MinesweperGame(int height, int width, int mineCount) {
 		}
 	}
 	// set mines and clues
-	for (std::unordered_map<BoardCoordinate, bool, BCHasher>::iterator iter = mines.begin(); iter != mines.end(); iter++) {
-		BoardCoordinate cMine = iter->first;
+	for (std::list<BoardCoordinate>::iterator iter = mines.begin(); iter != mines.end(); iter++) {
+		BoardCoordinate cMine = *iter;
 		std::get<1>(board[cMine.x][cMine.y]) = -1;
 		//for all 6 adjacent cells that aren't a mine, increase value
 		
@@ -73,7 +75,7 @@ MinesweperGame::BoardCoordinate::BoardCoordinate(const BoardCoordinate& old, int
 	x = old.x+xAdd;
 	y = old.y+yAdd;
 }
-bool MinesweperGame::BoardCoordinate::operator==(MinesweperGame::BoardCoordinate &b) const {
+bool MinesweperGame::BoardCoordinate::operator==(const MinesweperGame::BoardCoordinate &b) const {
 	return (x == b.x && y == b.y);
 }
 
