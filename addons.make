@@ -1,0 +1,5 @@
+ofxAssimpModelLoader
+ofxGui
+ofxNetwork
+ofxOsc
+ofxThreadedImageLoader
