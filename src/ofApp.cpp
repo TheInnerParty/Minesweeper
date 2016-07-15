@@ -21,9 +21,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	int x = 0, y = 0;
-	for (auto column : boardOrigins) {
+	for (auto && column : boardOrigins) {
 		y= 0;
-		for (auto cellOrigin : column) {
+		for (auto && cellOrigin : column) {
 			drawCell(cellOrigin, game->getCell(x, y));
 			y++;
 		}

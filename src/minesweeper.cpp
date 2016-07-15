@@ -157,8 +157,8 @@ MinesweperGame::Cell * MinesweperGame::getCellPtr(BoardCoordinate c) {
 }
 
 void MinesweperGame::checkWin() {
-	for (auto column : board) {
-		for (auto cell : column) {
+	for (auto && column : board) {
+		for (auto && cell : column) {
 			CellFog fogginess = std::get<0>(cell);
 			int value = std::get<1>(cell);
 			if (fogginess == FOGGY && value !=-1) {
@@ -171,8 +171,8 @@ void MinesweperGame::checkWin() {
 }
 
 void MinesweperGame::liftFog() {
-	for (auto column : board) {
-		for (auto cell : column) {
+	for (auto && column : board) {
+		for (auto && cell : column) {
 			std::get<0>(cell) = DISCOVERED;
 		}
 	}
