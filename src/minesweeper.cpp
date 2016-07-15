@@ -118,21 +118,36 @@ void MinesweperGame::probeCell(int x, int y) {
 }
 
 void MinesweperGame::revealAdjacent(MinesweperGame::BoardCoordinate coord) {
-	if (std::get<1>(*getCellPtr(coord)) == 0 && std::get<0>(*getCellPtr(coord))== FOGGY) {
+	if (std::get<1>(*getCellPtr(coord)) >= 0 && std::get<0>(*getCellPtr(coord))== FOGGY) {
 		std::get<0>(*getCellPtr(coord)) = DISCOVERED;
+		if (std::get<1>(*getCellPtr(coord)) == 0) {
+			if (coord.x<width-1) {
+				revealAdjacent(BoardCoordinate(coord,1,0));
+			}
+			if (coord.x>0) {
+				revealAdjacent(BoardCoordinate(coord,-1,0));
+			}
+			if (coord.y<height-1) {
+				revealAdjacent(BoardCoordinate(coord,0,1));
+			}
+			if (coord.y>0) {
+				revealAdjacent(BoardCoordinate(coord,0,-1));
+			}
+			//diag
+			if (coord.x<width-1 && coord.y<height-1 ) {
+				revealAdjacent(BoardCoordinate(coord,1,1));
+			}
+			if (coord.x<width-1 && coord.y>0 ) {
+				revealAdjacent(BoardCoordinate(coord,1,-1));
+			}
+			if (coord.x>0 && coord.y<height-1 ) {
+				revealAdjacent(BoardCoordinate(coord,-1,1));
+			}
+			if (coord.x>0 && coord.y>0 ) {
+				revealAdjacent(BoardCoordinate(coord,-1,-1));
+			}
+		}
 		
-		if (coord.x<width-1) {
-			revealAdjacent(BoardCoordinate(coord,1,0));
-		}
-		if (coord.x>0) {
-			revealAdjacent(BoardCoordinate(coord,-1,0));
-		}
-		if (coord.y<height-1) {
-			revealAdjacent(BoardCoordinate(coord,0,1));
-		}
-		if (coord.y>0) {
-			revealAdjacent(BoardCoordinate(coord,0,-1));
-		}
 		
 	}
 }
@@ -146,12 +161,21 @@ void MinesweperGame::checkWin() {
 		for (auto cell : column) {
 			CellFog fogginess = std::get<0>(cell);
 			int value = std::get<1>(cell);
-			if (value !=-1) {
+			if (fogginess == FOGGY && value !=-1) {
 				return;
 			}
 		}
 	}
 	std::cout << "Game Won!";
 	status = WON;
+}
+
+void MinesweperGame::liftFog() {
+	for (auto column : board) {
+		for (auto cell : column) {
+			std::get<0>(cell) = DISCOVERED;
+		}
+	}
+	std::cout << "\nFog Lifted!";
 }
 

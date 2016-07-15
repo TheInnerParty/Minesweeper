@@ -28,6 +28,8 @@ public:
 	int getCell(int x, int y);
 	void probeCell(int x, int y);
 	
+	void liftFog();
+	
 	int height;
 	int width;
 	int mineCount;

@@ -38,5 +38,6 @@ class ofApp : public ofBaseApp{
 	
 	void drawCell(ofPoint origin, int value);
 	
+	bool lifted;
 	
 };

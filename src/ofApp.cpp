@@ -6,10 +6,11 @@ void ofApp::setup(){
 	
 	initGame();
 	
-	ofSetFrameRate(2);
+	ofSetFrameRate(24); // increases power + processor efficiency
 	
 	ofSetWindowTitle("Minesweeper");
 	
+	lifted = false;
 }
 
 //--------------------------------------------------------------
@@ -28,10 +29,11 @@ void ofApp::draw(){
 		}
 		x++;
 	}
-	if (game->status == MinesweperGame::WON) {
-		ofSetColor(ofColor::lightGreen);
-		ofFill();
-		ofDrawRectangle(0, 0, ofGetScreenWidth(), ofGetScreenHeight());
+	if (game->status == MinesweperGame::WON && !lifted) {
+		
+		game->liftFog();
+		lifted = true;
+		
 	}
 }
 
@@ -79,7 +81,16 @@ void ofApp::mousePressed(int x, int y, int button){
 			}
 			i++;
 		}
-		game->probeCell(cellX, cellY);
+		try {
+			game->probeCell(cellX, cellY);
+		} catch (GameOver) {
+			std::cout << "\nGame Over";
+			endGame();
+			initGame();
+		} catch (InvalidCell) {
+			std::cout << "\nInvalid Cell";
+		}
+		
 	}
 	
 	
@@ -136,6 +147,8 @@ void ofApp::initGame(int height, int width, int mineCount) {
 }
 
 void ofApp::endGame() {
+	std::vector<std::vector<ofPoint>> empty;
+	boardOrigins = empty;
 	delete game;
 }
 
@@ -146,7 +159,9 @@ void ofApp::drawCell(ofPoint origin, int value) {
 	if (value == -2) {
 		ofSetColor(ofColor::gray);
 	} else if (value == -1) {
-		ofSetColor(ofColor::red);
+		if (game->status == MinesweperGame::WON) {
+			ofSetColor(ofColor::mistyRose);
+		} else ofSetColor(ofColor::red);
 		ofFill();
 	} else if (value == 0) {
 		ofSetColor(ofColor::beige);
