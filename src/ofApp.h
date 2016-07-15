@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "minesweeper.hpp"
+#include <vector>
+#include <string>
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +23,20 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+	
+		void exit();
+	
+	MinesweperGame * game;
+	
+	void initGame(int height = 10, int width = 10, int mineCount = 15);
+	void endGame();
+	
+	std::vector<std::vector<ofPoint>> boardOrigins;
+	
+	
+	int cellLength;
+	
+	void drawCell(ofPoint origin, int value);
+	
+	
 };

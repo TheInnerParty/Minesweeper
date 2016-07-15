@@ -96,6 +96,7 @@ void MinesweperGame::probeCell(int x, int y) {
 	if (status == WON || status == LOST) {
 		throw gameOver;
 	}
+	std::cout << "\nProbing " << x << ", " << y;
 	BoardCoordinate coord(x,y);
 	Cell * cell = getCellPtr(coord);
 	int value = std::get<1>(*cell);
@@ -145,7 +146,7 @@ void MinesweperGame::checkWin() {
 		for (auto cell : column) {
 			CellFog fogginess = std::get<0>(cell);
 			int value = std::get<1>(cell);
-			if (fogginess == FOGGY || value !=-1) {
+			if (value !=-1) {
 				return;
 			}
 		}
