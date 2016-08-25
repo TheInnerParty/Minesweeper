@@ -10,7 +10,7 @@ void ofApp::setup(){
 	
 	ofSetWindowTitle("Minesweeper");
 	
-	lifted = false;
+	
 }
 
 //--------------------------------------------------------------
@@ -34,6 +34,9 @@ void ofApp::draw(){
 		game->liftFog();
 		lifted = true;
 		
+	}
+	if (game->status == MinesweperGame::WON) {
+		ofDrawBitmapString("You Win!", ofGetScreenWidth()/2, ofGetScreenHeight()/2);
 	}
 }
 
@@ -135,6 +138,7 @@ void ofApp::exit() {
 void ofApp::initGame(int height, int width, int mineCount) {
 	game = new MinesweperGame(height, width, mineCount);
 	cellLength = 50;
+	lifted = false;
 	
 	for (int x = 0; x < width; x++) {
 		boardOrigins.emplace_back(std::vector<ofPoint>());
@@ -167,7 +171,28 @@ void ofApp::drawCell(ofPoint origin, int value) {
 		ofSetColor(ofColor::beige);
 		ofFill();
 	} else {
-		ofSetColor(ofColor::lightBlue);
+		if (value == 1) {
+			ofSetColor(ofColor::lightBlue);
+		}
+		if (value == 2) {
+			ofSetColor(ofColor::lightGreen);
+		}
+		if (value == 3) {
+			ofSetColor(ofColor::orange);
+		}
+		if (value == 4) {
+			ofSetColor(ofColor::lightSalmon);
+		}
+		if (value == 5) {
+			ofSetColor(ofColor::lightGoldenRodYellow);
+		}
+		if (value == 6) {
+			ofSetColor(ofColor::chocolate);
+		}
+		if (value >=7) {
+			ofSetColor(ofColor::moccasin);
+		}
+		
 		ofFill();
 	}
 	ofRectangle cell(origin, cellLength, cellLength);

@@ -6,9 +6,9 @@
 ################################################################################
 # OF ROOT
 #   The location of your root openFrameworks installation
-#       (default) OF_ROOT = ../../../../../.. 
+#       (default) OF_ROOT = ../../../.. 
 ################################################################################
-# OF_ROOT = ../../../../../..
+# OF_ROOT = ../../../..
 
 ################################################################################
 # PROJECT ROOT
@@ -77,7 +77,7 @@
 # add a runtime path to search for those shared libraries, since they aren't 
 # incorporated directly into the final executable application binary.
 # TODO: should this be a default setting?
-# PROJECT_LDFLAGS=-Wl,-rpath=./libs
+PROJECT_LDFLAGS=-Wl,-rpath=./libs, -s DISABLE_EXCEPTION_CATCHING=0 
 
 ################################################################################
 # PROJECT DEFINES
@@ -105,7 +105,7 @@
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_CFLAGS = 
+# PROJECT_CFLAGS =
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS
@@ -128,7 +128,7 @@
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_OPTIMIZATION_CFLAGS_RELEASE = 
+# PROJECT_OPTIMIZATION_CFLAGS_RELEASE =
 # PROJECT_OPTIMIZATION_CFLAGS_DEBUG = 
 
 ################################################################################
