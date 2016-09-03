@@ -1,6 +1,8 @@
 # Minesweeper
 A minimalist minesweeper game.
 
+Play the web version here: https://theinnerparty.github.io/Minesweeper/webDemo/minesweeper.html
+
 Includes a fully featured and portable game logic engine, and a graphical frontend written with openFrameworks.
 
 ## Build Instructions (for macOS):
