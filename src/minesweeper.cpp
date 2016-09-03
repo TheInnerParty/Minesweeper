@@ -8,7 +8,7 @@
 
 #include "minesweeper.hpp"
 
-MinesweperGame::MinesweperGame(int height, int width, int mineCount) {
+MinesweperGame::MinesweperGame(int height, int width, int mineCount, int startX, int startY) {
 	this->height = height;
 	this->width = width;
 	this->mineCount = mineCount;
@@ -25,7 +25,7 @@ MinesweperGame::MinesweperGame(int height, int width, int mineCount) {
 		do {
 			BoardCoordinate mine(rand() % width, rand() % height);
 			// TODO: Use Map for mines to reduce running time
-			if (std::find(mines.begin(), mines.end(), mine) == mines.end()) {
+			if (std::find(mines.begin(), mines.end(), mine) == mines.end() && mine.x!=startX && mine.y!=startY) {
 				mines.push_back(mine);
 				retry = false;
 			} else retry= true;

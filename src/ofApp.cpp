@@ -5,8 +5,9 @@ void ofApp::setup(){
 	ofSetBackgroundColor(ofColor::white);
 	
 	initGame();
-	
+#if !defined(EMSCRIPTEN)
 	ofSetFrameRate(24); // increases power + processor efficiency
+#endif
 	
 	ofSetWindowTitle("Minesweeper");
 	
@@ -38,6 +39,7 @@ void ofApp::draw(){
 	if (game->status == MinesweperGame::WON) {
 		ofDrawBitmapString("You Win!", ofGetScreenWidth()/2, ofGetScreenHeight()/2);
 	}
+	ofDrawBitmapString(std::to_string(ofGetFrameRate()), 10, 10);
 }
 
 //--------------------------------------------------------------
