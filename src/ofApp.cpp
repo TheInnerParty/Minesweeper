@@ -69,6 +69,7 @@ void ofApp::mousePressed(int x, int y, int button){
 		int cellY;
 		int i = 0;
 		while (1) {
+			//this is a comment
 			
 			if (i*cellLength >=x) {
 				cellX = i-1;
